@@ -24,8 +24,6 @@ public class Controlador extends HttpServlet {
     		
     		evento= request.getParameter("event");
     		
-    		String res;   
-    		
     		switch (evento)
     		{
     			case "index": { url= "/index.html"; break; }
@@ -35,19 +33,23 @@ public class Controlador extends HttpServlet {
     			case "toDelete": { url= "/jsp/localidad/delete.jsp"; break; }
     			case "create": {
     				String nombre= request.getParameter("nombre");
-					int lon=  Integer.parseInt((request.getParameter("longitud"))); 
-					int lat=   Integer.parseInt((request.getParameter("latitud")));
-					int activo=    Integer.parseInt((request.getParameter("activo")));
+					int lon= Integer.parseInt((request.getParameter("longitud"))); 
+					int lat= Integer.parseInt((request.getParameter("latitud")));
+					int activo= Integer.parseInt((request.getParameter("activo")));
     				
-					res= DelegadoPeticiones.getInstancia().peticionPOST(nombre, lon, lat, activo);
-		            System.out.println(res);
+					int res= Integer.parseInt(DelegadoPeticiones.getInstancia().peticionPOST(nombre, lon, lat, activo));
+					
+					if (res>0) { mensaje="Se ha creado la localidad con id "+ res; }
+		             else {mensaje= "Error en la creacion"; }
 					
     				break; }
-				case "read": { 
+				case "read": {
 					int id= Integer.parseInt((request.getParameter("id")));
 					
-					res= DelegadoPeticiones.getInstancia().peticionGET(id);
-		            System.out.println(res);
+					String res= DelegadoPeticiones.getInstancia().peticionGET(id);
+					
+					if (res!=null) { mensaje= res.toString(); }
+		             else {mensaje= "Error en la lectura"; }
 					
 		            break; }
 				    		
@@ -58,16 +60,20 @@ public class Controlador extends HttpServlet {
 					int lat=   Integer.parseInt((request.getParameter("latitud")));
 					int activo=    Integer.parseInt((request.getParameter("activo")));
 					
-					res= DelegadoPeticiones.getInstancia().peticionPUT(id, nombre, lon, lat, activo);
-		            System.out.println(res);
+					int res= DelegadoPeticiones.getInstancia().peticionPUT(id, nombre, lon, lat, activo);
+		            
+					if (res>0) { mensaje="Se ha actualizado la localidad con id " + id; }
+		             else {mensaje= "Error en la actualizacion"; }
 		            
 					break; }
 				
 				case "delete": {
 					int id= Integer.parseInt((request.getParameter("id")));
 					
-					res= DelegadoPeticiones.getInstancia().peticionDELETE(id);
-		            System.out.println(res);
+					int res= DelegadoPeticiones.getInstancia().peticionDELETE(id);
+		            
+					if (res == 1) { mensaje= "Se ha eliminado la localidad con id " + id; }
+		             else {mensaje= "Error en la eliminacion"; }
 					
 					break; }
     			

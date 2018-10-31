@@ -13,6 +13,6 @@ public abstract class DelegadoPeticiones {
 	
 	public abstract String peticionPOST(String nombre, int lon, int lat, int activo);
 	public abstract String peticionGET(int id);
-	public abstract String peticionPUT(int id, String nombre, int lon, int lat, int activo);
-	public abstract String peticionDELETE(int id);
+	public abstract int peticionPUT(int id, String nombre, int lon, int lat, int activo);
+	public abstract int peticionDELETE(int id);
 }

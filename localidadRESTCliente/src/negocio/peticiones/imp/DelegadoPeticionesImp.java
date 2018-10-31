@@ -11,6 +11,7 @@ import negocio.peticiones.DelegadoPeticiones;
 public class DelegadoPeticionesImp extends DelegadoPeticiones {
 	
 	protected final static String url= "http://localhost:8080/localidadREST/servicios/localidad/wsb";
+	
 	@Override
 	public String peticionPOST(String nombre, int lon, int lat, int activo) {
 		Client cliente = ClientBuilder.newClient();
@@ -34,7 +35,7 @@ public class DelegadoPeticionesImp extends DelegadoPeticiones {
 	}
 	
 	@Override
-	public String peticionPUT(int id, String nombre, int lon, int lat, int activo) {
+	public int peticionPUT(int id, String nombre, int lon, int lat, int activo) {
 		Client cliente = ClientBuilder.newClient();
 
 		Form form= new Form();
@@ -44,7 +45,7 @@ public class DelegadoPeticionesImp extends DelegadoPeticiones {
 		form.param("lat", Integer.toString(lat));
 		form.param("activo", Integer.toString(activo));
 				
-		String res= cliente.target(url).request().put(Entity.form(form), String.class);
+		int res= cliente.target(url).request().put(Entity.form(form), Integer.class);
 
 		cliente.close();
 		
@@ -52,10 +53,10 @@ public class DelegadoPeticionesImp extends DelegadoPeticiones {
 	}
 	
 	@Override
-	public String peticionDELETE(int id) {
+	public int peticionDELETE(int id) {
 		Client cliente = ClientBuilder.newClient();
 
-		String res= cliente.target(url + "?id="+id).request().delete(String.class);
+		int res= cliente.target(url + "?id="+id).request().delete(Integer.class);
 		
 		cliente.close();
 		
