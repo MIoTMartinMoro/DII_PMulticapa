@@ -23,7 +23,8 @@ public class Controlador extends HttpServlet {
     		String url= "/jsp/salida/salida.jsp"; 
     		
     		evento= request.getParameter("event");
-    		
+    		evento= (evento == null) ? "index" : evento;
+
     		switch (evento)
     		{
     			case "index": { url= "/index.html"; break; }
