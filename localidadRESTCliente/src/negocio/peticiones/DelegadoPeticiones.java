@@ -11,8 +11,8 @@ public abstract class DelegadoPeticiones {
 		return instancia;
 	}
 	
-	public abstract String peticionPOST(String nombre, int lon, int lat, int activo);
-	public abstract String peticionGET(int id);
-	public abstract int peticionPUT(int id, String nombre, int lon, int lat, int activo);
-	public abstract int peticionDELETE(int id);
+	public abstract String create(String nombre, int lon, int lat, int activo);
+	public abstract String read(int id);
+	public abstract int update(int id, String nombre, int lon, int lat, int activo);
+	public abstract int delete(int id);
 }

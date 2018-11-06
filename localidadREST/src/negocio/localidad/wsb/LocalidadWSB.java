@@ -24,7 +24,7 @@ public class LocalidadWSB {
 	@GET
 	@Path("/{id}")
 	@Produces("text/plain")
-	public String readGET(@PathParam("id") String idStr)
+	public String read(@PathParam("id") String idStr)
 	{
 		int id = Integer.parseInt(idStr);
 		TLocalidad localidad = FactoriaNegocio.getInstancia().generaSALocalidad().read(id);
@@ -33,7 +33,7 @@ public class LocalidadWSB {
 	}
 	
 	@POST
-	public Response readPOST(String s)
+	public Response create(String s)
 	{
 		
 		List<String> l = Arrays.asList(s.split("\\s*,\\s*"));
@@ -52,14 +52,14 @@ public class LocalidadWSB {
 	
 	@DELETE
 	@Produces("text/plain")
-	public int readDELETE(@QueryParam("id") String idStr)
+	public int delete(@QueryParam("id") String idStr)
 	{
 		int id = Integer.parseInt(idStr);
 		return FactoriaNegocio.getInstancia().generaSALocalidad().delete(id);
 	}
 
 	@PUT
-	public int readPUT(@FormParam("id") String idStr, @FormParam("nombre") String nombre, @FormParam("lon") String lonStr, @FormParam("lat") String latStr, @FormParam("activo") String activoStr)
+	public int update(@FormParam("id") String idStr, @FormParam("nombre") String nombre, @FormParam("lon") String lonStr, @FormParam("lat") String latStr, @FormParam("activo") String activoStr)
 	{
 		
 		int id= Integer.parseInt(idStr); 

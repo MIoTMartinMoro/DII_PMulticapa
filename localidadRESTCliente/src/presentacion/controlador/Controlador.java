@@ -37,7 +37,7 @@ public class Controlador extends HttpServlet {
 					int lat= Integer.parseInt((request.getParameter("latitud")));
 					int activo= Integer.parseInt((request.getParameter("activo")));
     				
-					int res= Integer.parseInt(DelegadoPeticiones.getInstancia().peticionPOST(nombre, lon, lat, activo));
+					int res= Integer.parseInt(DelegadoPeticiones.getInstancia().create(nombre, lon, lat, activo));
 					
 					if (res>0) { mensaje="Se ha creado la localidad con id "+ res; }
 		             else {mensaje= "Error en la creacion"; }
@@ -46,7 +46,7 @@ public class Controlador extends HttpServlet {
 				case "read": {
 					int id= Integer.parseInt((request.getParameter("id")));
 					
-					String res= DelegadoPeticiones.getInstancia().peticionGET(id);
+					String res= DelegadoPeticiones.getInstancia().read(id);
 					
 					if (res!=null) { mensaje= res.toString(); }
 		             else {mensaje= "Error en la lectura"; }
@@ -60,7 +60,7 @@ public class Controlador extends HttpServlet {
 					int lat=   Integer.parseInt((request.getParameter("latitud")));
 					int activo=    Integer.parseInt((request.getParameter("activo")));
 					
-					int res= DelegadoPeticiones.getInstancia().peticionPUT(id, nombre, lon, lat, activo);
+					int res= DelegadoPeticiones.getInstancia().update(id, nombre, lon, lat, activo);
 		            
 					if (res>0) { mensaje="Se ha actualizado la localidad con id " + id; }
 		             else {mensaje= "Error en la actualizacion"; }
@@ -70,7 +70,7 @@ public class Controlador extends HttpServlet {
 				case "delete": {
 					int id= Integer.parseInt((request.getParameter("id")));
 					
-					int res= DelegadoPeticiones.getInstancia().peticionDELETE(id);
+					int res= DelegadoPeticiones.getInstancia().delete(id);
 		            
 					if (res == 1) { mensaje= "Se ha eliminado la localidad con id " + id; }
 		             else {mensaje= "Error en la eliminacion"; }
